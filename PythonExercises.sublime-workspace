@@ -1,0 +1,337 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "import matplotlib.pyplot as plt\nimport numpy as np\n\n\ndef calcular_raizes(\n    a: float, b: float, c: float\n) -> tuple[float, tuple[float | complex, ...]]:\n    if a == 0:\n        raise ValueError(\n            \"O coeficiente 'a' deve ser diferente de zero para uma equação de segundo grau.\"\n        )\n\n    delta = (b**2) - (4 * a * c)\n\n    if delta > 0:\n        x1 = (-b + delta**0.5) / (2 * a)\n        x2 = (-b - delta**0.5) / (2 * a)\n        raizes = (x1, x2)\n    elif delta == 0:\n        x1 = -b / (2 * a)\n        raizes = (x1,)\n    else:\n        parte_real = -b / (2 * a)\n        parte_imag = ((-delta) ** 0.5) / (2 * a)\n        raizes = (\n            complex(parte_real, parte_imag),\n            complex(parte_real, -parte_imag),\n        )\n\n    return delta, raizes\n\n\ndef plotar_grafico(\n    a: float,\n    b: float,\n    c: float,\n    delta: float,\n    raizes: tuple[float | complex, ...],\n) -> None:\n    xv = -b / (2 * a)\n    yv = (a * xv**2) + (b * xv) + c\n\n    # Ajusta o domínio do gráfico dinamicamente com base nas raízes ou no vértice\n    if delta >= 0:\n        valores_x = [float(r) for r in raizes] + [xv]\n        margem = max(abs(max(valores_x) - min(valores_x)) * 0.4, 2.0)\n        x_min, x_max = min(valores_x) - margem, max(valores_x) + margem\n    else:\n        x_min, x_max = xv - 5.0, xv + 5.0\n\n    x = np.linspace(x_min, x_max, 400)\n    y = (a * x**2) + (b * x) + c\n\n    fig, ax = plt.subplots(figsize=(8, 5))\n    ax.plot(x, y, label=f\"f(x) = {a}x² + {b}x + {c}\", color=\"#1f77b4\", lw=2)\n\n    # Eixos cartesianos de referência\n    ax.axhline(0, color=\"gray\", linestyle=\"--\", linewidth=0.8)\n    ax.axvline(0, color=\"gray\", linestyle=\"--\", linewidth=0.8)\n\n    # Destaque do vértice\n    ax.scatter(\n        [xv], [yv], color=\"#d62728\", zorder=5, label=f\"Vértice: ({xv:.2f}, {yv:.2f})\"\n    )\n\n    # Destaque das raízes reais no plano cartesiano\n    if delta >= 0:\n        for idx, r in enumerate(raizes, start=1):\n            ax.scatter(\n                [r],\n                [0],\n                color=\"#2ca02c\",\n                zorder=5,\n                label=f\"Raiz x{idx}: {r:.2f}\",\n            )\n\n    ax.set_title(\"Equação de 2º Grau - Análise Gráfica\")\n    ax.set_xlabel(\"x\")\n    ax.set_ylabel(\"f(x)\")\n    ax.grid(True, linestyle=\":\", alpha=0.6)\n    ax.legend()\n    plt.tight_layout()\n    plt.show()\n\n\ndef main() -> None:\n    try:\n        a = float(input(\"Coeficiente a: \"))\n        b = float(input(\"Coeficiente b: \"))\n        c = float(input(\"Coeficiente c: \"))\n\n        delta, raizes = calcular_raizes(a, b, c)\n\n        print(f\"\\nΔ (Delta): {delta:.2f}\")\n        if delta > 0:\n            print(f\"Duas raízes reais distintas: x1 = {raizes[0]:.2f}, x2 = {raizes[1]:.2f}\")\n        elif delta == 0:\n            print(f\"Raiz real única (dupla): x = {raizes[0]:.2f}\")\n        else:\n            print(f\"Raízes complexas: {raizes[0]:.2f} e {raizes[1]:.2f}\")\n\n        plotar_grafico(a, b, c, delta, raizes)\n\n    except ValueError as e:\n        print(f\"Erro de entrada: {e}\")\n\n\nif __name__ == \"__main__\":\n    main()",
+			"file": "/C/Users/PpgSocial1/Downloads/Nova pasta (2)/Calc2grau.py",
+			"file_size": 3046,
+			"file_write_time": 134384432318768875,
+			"settings":
+			{
+				"buffer_size": 3026,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"terminu",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"install pa",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"open ter",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"Terminus: Open Default Shell in Panel",
+				"Terminus: Open Default Shell in Panel"
+			],
+			[
+				"Package Control: Install Package",
+				"Package Control: Install Package"
+			],
+			[
+				"Terminus: Open Default Shell in Tab",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"Install Package Control",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 271.0,
+		"history":
+		[
+			"git config --global user.name \"iaquinoc1\"",
+			"exit",
+			"git config --global user.name \"iaquinoc1\"\ngit config --global user.email \"israell.aquino@gmail.com\"",
+			"git config --global user.name \"Seu Nome\"\ngit config --global user.email \"seu-email@exemplo.com\""
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/PpgSocial1/PythonExercises"
+	],
+	"file_history":
+	[
+		"/C/Users/PpgSocial1/Downloads/Nova pasta (2)/Cisco2.py",
+		"/C/Users/PpgSocial1/PythonExercises/print ('Hello!').py",
+		"/C/Users/PpgSocial1/PythonExercises/Aula 4-3.py",
+		"/C/Users/PpgSocial1/AppData/Roaming/Sublime Text/Packages/User/Main.sublime-menu",
+		"/C/Users/PpgSocial1/PythonExercises/Aula teste.py",
+		"/C/Users/PpgSocial1/PythonExercises/total.py"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/PpgSocial1/Downloads/Nova pasta (2)/Calc2grau.py",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3026,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.Terminus":
+	{
+		"height": 255.0,
+		"history":
+		[
+		]
+	},
+	"output.exec":
+	{
+		"height": 310.0,
+		"history":
+		[
+			"-9",
+			"6",
+			"2",
+			"0",
+			"2",
+			"15",
+			"0",
+			"2",
+			"12",
+			"23",
+			"15",
+			"git config --global user.name \"Seu Nome\"\ngit config --global user.email \"seu-email@exemplo.com\"",
+			"0",
+			"2",
+			"5",
+			"45",
+			"0",
+			"5",
+			"45",
+			"0",
+			"8",
+			"6",
+			"25",
+			"exit",
+			"0",
+			"2",
+			"25",
+			"teste",
+			"0",
+			"3",
+			"9",
+			"88",
+			"17",
+			"6",
+			"2",
+			"25",
+			"0",
+			"2",
+			"13",
+			"25",
+			"0",
+			"44",
+			"41",
+			"4"
+		]
+	},
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "PythonExercises.sublime-project",
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "p",
+		"selected_items":
+		[
+			[
+				"p",
+				"C:\\Users\\PpgSocial1\\PythonExercises\\PythonExercises.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
