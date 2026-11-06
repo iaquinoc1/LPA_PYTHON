@@ -1,0 +1,8 @@
+Passo a passo para atualizar o diretório do GitHub:
+
+1.Salvar o arquivo no computador (ctrl+s), dentro da pasta correspondente
+2.Abrir o Terminus (ctrl+shift+p)
+3.git status (novo arquivo listado em vermelho)
+4.git add . (adiciona tudo)
+5.git commit -m "Digito um nome para a alteração"
+6.git push
