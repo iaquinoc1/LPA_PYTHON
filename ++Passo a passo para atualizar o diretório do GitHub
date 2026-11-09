@@ -5,4 +5,5 @@ Passo a passo para atualizar o diretório do GitHub:
 3.git status (novo arquivo listado em vermelho)
 4.git add . (adiciona tudo)
 5.git commit -m "Digito um nome para a alteração"
-6.git push
+6.git push para enviar
+7.git pull para puxar
