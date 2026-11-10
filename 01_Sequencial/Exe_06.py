@@ -1,2 +1,3 @@
 raio = float(input("Informe o raio: "))
-print ("Área do círculo =", 3.1415 * raio ** 2)
+area = 3.1415 * raio ** 2
+print (f'Área do círculo = {area: .2f}')
